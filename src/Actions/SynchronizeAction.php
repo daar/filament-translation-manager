@@ -2,12 +2,11 @@
 
 namespace musa11971\FilamentTranslationManager\Actions;
 
-use Filament\Pages\Page;
-use Illuminate\Support\Str;
 use Filament\Pages\Actions\Action;
-use Spatie\TranslationLoader\LanguageLine;
-use musa11971\FilamentTranslationManager\Helpers\TranslationScanner;
+use Filament\Pages\Page;
 use musa11971\FilamentTranslationManager\Commands\SynchronizeTranslationsCommand;
+use musa11971\FilamentTranslationManager\Helpers\TranslationScanner;
+use Spatie\TranslationLoader\LanguageLine;
 
 class SynchronizeAction extends Action
 {
@@ -43,7 +42,7 @@ class SynchronizeAction extends Action
                 ->where('key', $groupAndKey['key'])
                 ->first();
 
-            if (!$existingItem) {
+            if (! $existingItem) {
                 LanguageLine::create([
                     'group' => $groupAndKey['group'],
                     'key' => $groupAndKey['key'],
@@ -53,7 +52,7 @@ class SynchronizeAction extends Action
                 $result['total_count'] += 1;
 
                 $runTime = number_format((microtime(true) - $startTime) * 1000, 2);
-                $command?->components()->twoColumnDetail($groupAndKey['group'] . '.' . $groupAndKey['key'], "<fg=gray>$runTime ms</> <fg=green;options=bold>DONE</>");
+                $command?->components()->twoColumnDetail($groupAndKey['group'] . '.' . $groupAndKey['key'], "<fg=gray>{$runTime} ms</> <fg=green;options=bold>DONE</>");
             }
         }
 

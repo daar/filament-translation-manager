@@ -2,8 +2,8 @@
 
 namespace musa11971\FilamentTranslationManager\Helpers;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class TranslationScanner
 {
@@ -43,7 +43,7 @@ class TranslationScanner
                 }
 
                 // new translation found
-                if (!$found) {
+                if (! $found) {
                     $allGroupsAndKeys[] = [
                         'group' => $group,
                         'key' => $key,
